@@ -8,13 +8,13 @@ export const Pokemon = () => {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
 
-  const API = "https://pokeapi.co/api/v2/pokemon?limit=200";
+  const API = "https://pokeapi.co/api/v2/pokemon?limit=1351";
 
   const fetchPokemon = async () => {
     try {
       const res = await fetch(API);
       const data = await res.json();
-      //   console.log(data);
+        console.log(data);
 
       const detailedPokemonData = data.results.map(async (curPokemon) => {
         const res = await fetch(curPokemon.url);
@@ -62,13 +62,22 @@ export const Pokemon = () => {
 
   return (
     <>
-      <section className="container">
+      <section>
         <header>
           <h1> Lets Catch Pokémon</h1>
         </header>
+        <div className="pokemon-search">
+          <input 
+            type="text" 
+            placeholder="Search Pokemon"
+            value={search}
+            onChange={(e)=> setSearch(e.target.value)}
+            />
+        </div>
         <div>
             <ul className="cards">
-                {pokemon.map((curPokemon)=> {
+                {/* {pokemon.map((curPokemon)=> {} */}
+                  {searchData.map((curPokemon)=> {
                     return <PokemonCards key={curPokemon.id} pokemonData={curPokemon} />
                 })
                 }
